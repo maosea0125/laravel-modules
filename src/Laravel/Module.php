@@ -5,8 +5,8 @@ namespace Nwidart\Modules\Laravel;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\ProviderRepository;
-use Illuminate\Support\Str;
 use Nwidart\Modules\Module as BaseModule;
+use Nwidart\Modules\Support\ModuleStr;
 
 class Module extends BaseModule
 {
@@ -15,7 +15,7 @@ class Module extends BaseModule
      */
     public function getCachedServicesPath()
     {
-        return Str::replaceLast('services.php', $this->getSnakeName() . '_module.php', $this->app->getCachedServicesPath());
+        return ModuleStr::replaceLast('services.php', $this->getSnakeName() . '_module.php', $this->app->getCachedServicesPath());
     }
 
     /**

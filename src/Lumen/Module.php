@@ -2,8 +2,8 @@
 
 namespace Nwidart\Modules\Lumen;
 
-use Illuminate\Support\Str;
 use Nwidart\Modules\Module as BaseModule;
+use Nwidart\Modules\Support\ModuleStr;
 
 class Module extends BaseModule
 {
@@ -12,7 +12,7 @@ class Module extends BaseModule
      */
     public function getCachedServicesPath()
     {
-        return Str::replaceLast('services.php', $this->getSnakeName() . '_module.php', $this->app->basePath('storage/app/') . 'services.php');
+        return ModuleStr::replaceLast('services.php', $this->getSnakeName() . '_module.php', $this->app->basePath('storage/app/') . 'services.php');
     }
 
     /**
