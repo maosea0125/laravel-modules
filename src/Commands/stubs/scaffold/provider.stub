@@ -60,7 +60,7 @@ class $CLASS$ extends ServiceProvider
      */
     public function registerViews()
     {
-        $viewPath = resource_path('views/modules/$LOWER_NAME$');
+        $viewPath = base_path('resources/views/modules/$LOWER_NAME$');
 
         $sourcePath = __DIR__.'/../$PATH_VIEWS$';
 
@@ -80,7 +80,7 @@ class $CLASS$ extends ServiceProvider
      */
     public function registerTranslations()
     {
-        $langPath = resource_path('lang/modules/$LOWER_NAME$');
+        $langPath = base_path('resources/lang/modules/$LOWER_NAME$');
 
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, '$LOWER_NAME$');
@@ -109,5 +109,20 @@ class $CLASS$ extends ServiceProvider
     public function provides()
     {
         return [];
+    }
+
+    /**
+     * Register a database migration path.
+     *
+     * @param  array|string  $paths
+     * @return void
+     */
+    protected function loadMigrationsFrom($paths)
+    {
+        $this->app->afterResolving('migrator', function ($migrator) use ($paths) {
+            foreach ((array) $paths as $path) {
+                $migrator->path($path);
+            }
+        });
     }
 }
